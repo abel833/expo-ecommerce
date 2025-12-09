@@ -23,7 +23,13 @@ if (ENV.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '../admin', "dist", 'index.html'));
   });
 } 
-app.listen(ENV.PORT, () => {
-  console.log('Server is running on Port 3000');
-  connectDB();
-});
+
+const startServer = async () => {
+  await connectDB();
+
+  app.listen(ENV.PORT, () => {
+    console.log(`Server is running on port ${ENV.PORT}`);
+  });
+};
+
+startServer();
